@@ -7,12 +7,12 @@ public class parranda {
 		int precio[]=new int[] {3500,25000,30000};
 		String cosas[]=new String[]{"cervezas","agua ardiente", "comida"};
 		System.out.println("pcuantan personas van");
-		int personas=teclado.nextInt();
+		int persona=teclado.nextInt();
 		int valor=0;
 		for (int i = 0; i < cosas.length; i++) {
-			valor=valor+precio[i]*personas;
+			valor=valor+precio[i]*persona;
 		}
-		valor=valor/personas;
+		valor=valor/persona;
 		System.out.println("cada persona tiene que poner"+valor);
 	}
 
