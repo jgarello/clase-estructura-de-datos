@@ -1,20 +1,34 @@
 package trabajo_parcial;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.*;
 public class coctel {
 
 	public static void main(String[] args) {
-	Scanner teclado=new Scanner(System.in);
-	double cantidad[]=new double[] {2.0,4.0,0.5,2.0};
-	String precio[]=new String[]{"gin","agua tónica", "limón","Hielo"};
-	System.out.println("familiares en la reunion: ");
-	int personas=teclado.nextInt();
-	for (int i = 0; i < cantidad.length; i++) {
-		cantidad[i]=cantidad[i]*personas;
+		try
+		{
+			BufferedReader br = new BufferedReader( new InputStreamReader( System.in ) );
+			BufferedWriter bw = new BufferedWriter( new OutputStreamWriter( System.out ) );
+		
+			double quantity[]=new double[] {2.0,4.0,0.5,2.0};
+			String price[]=new String[]{"gin","agua tónica", "limón","Hielo"};
+			bw.write("familiares en la reunion: ");
+			bw.flush();
+			int person=Integer.parseInt( br.readLine());
+			for (int i = 0; i < quantity.length; i++) {
+				quantity[i]=quantity[i]*person;
+			}
+			bw.write("para el gin tonic sera necesario");
+			bw.flush();
+			for (int i = 0; i < price.length; i++) {
+				bw.write("\n"+i+") "+ "producto" +" "+ price[i]+" " +"necesario"+" " + quantity[i] );
+				bw.flush();
+			}
 	}
-	 System.out.println("para el gin tonic sera necesario");
-	for (int i = 0; i < precio.length; i++) {
-	
-		System.out.println(i+") "+ "producto" +" "+ precio[i]+" " +"necesario"+" " + cantidad[i] );
-	}
-	}
+		catch(Exception ex) {
+			ex.printStackTrace();
+		}
+}
 }
