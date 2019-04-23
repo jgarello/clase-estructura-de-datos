@@ -23,6 +23,8 @@ public class Stack {
 	 */
 	public void push(Node newNode)
 	{
+		newNode.setNext(top);
+		top=newNode;
 		
 	}
 	
@@ -33,7 +35,11 @@ public class Stack {
 	 */
 	public Node pop()
 	{
-		return null;
+		Node temp=top;
+		top=top.getNext();
+		System.gc();
+		return temp;
+		
 	}
 	
 	
@@ -43,7 +49,7 @@ public class Stack {
 	 */
 	public String peek()
 	{
-		return null;
+		return top.toString();
 	}
 	
 	
