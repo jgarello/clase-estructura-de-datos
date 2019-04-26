@@ -42,20 +42,26 @@ public class StringAsList {
 	 */
 	public StringAsList[] split(StringAsList regex)
 	{
-		StringAsList[] response = null;
 		Node temp=string.head;
+		Node temp2=regex.string.head;
 		int contador=0;
 		int contador_lista1=0;
-		while(temp!=regex.string.head && contador!=regex.length() ) {
-			
-			
+		while(!temp.equals(temp2)) {
+			contador_lista1++;
+			temp=temp.getNext();
+			if(temp.equals(temp2)) {
+				contador++;
+			}
+			if(contador<regex.length()) {
+				temp2=temp2.getNext();
+			}
 		}
+		List lista_pequeña=string.sublist(0, contador_lista1);
 		
-		
-		
-		
-		
-		
+		StringAsList[] response = new StringAsList[lista_pequeña.length()];
+		for (int i = 0; i < lista_pequeña.length(); i++) {
+			response[i]=(StringAsList) lista_pequeña.get(i);
+		}	
 		return response; 
 	}
 	
