@@ -20,9 +20,10 @@ public static void main(String[] args) throws NumberFormatException, IOException
 	for (int i = 0; i <  casos; i++) {
 		String nombre=br.readLine();
 		String clave=br.readLine();
-		System.out.println(nombre);
-		System.out.println();
-		System.out.println(hash.get(clave));
+		bw.write(nombre);
+		bw.write('\n');
+		bw.write(hash.get(clave));
+		bw.flush();
 	}
 }
 }
