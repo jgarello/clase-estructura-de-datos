@@ -43,6 +43,19 @@ public class StringAsList {
 	public StringAsList[] split(StringAsList regex)
 	{
 		StringAsList[] response = null;
+		Node temp=string.head;
+		int contador=0;
+		int contador_lista1=0;
+		while(temp!=regex.string.head && contador!=regex.length() ) {
+			
+			
+		}
+		
+		
+		
+		
+		
+		
 		return response; 
 	}
 	

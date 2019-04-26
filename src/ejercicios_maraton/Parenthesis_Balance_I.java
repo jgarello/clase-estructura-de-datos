@@ -55,15 +55,15 @@ public class Parenthesis_Balance_I {
 	public void solution() {
 		BufferedReader br = new BufferedReader( new InputStreamReader( System.in ));
 		BufferedWriter bw = new BufferedWriter( new OutputStreamWriter( System.out ));
-		Stack pila=new Stack();
+		
 		try
 		{
-			
-			while(br.readLine()!=null) {
+			String s=br.readLine();
+			while(s!=null) {
 					
-				
+				Stack pila=new Stack();
 			
-			String[] lectura=br.readLine().split("");
+			String[] lectura=s.split("");
 			
 			for (int i = 0; i < lectura.length; i++) {
 				if(lectura[i].equals("(")) {
@@ -87,6 +87,7 @@ public class Parenthesis_Balance_I {
 				bw.write ("incorrecto"+"/");
 				bw.flush();
 			}
+			s=br.readLine();
 		}
 		}
 		catch(Exception ex) 
