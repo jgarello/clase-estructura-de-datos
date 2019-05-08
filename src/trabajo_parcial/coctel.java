@@ -1,4 +1,4 @@
-package trabajo_parcial;
+ package trabajo_parcial;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
