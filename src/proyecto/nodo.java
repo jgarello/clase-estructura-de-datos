@@ -1,11 +1,5 @@
 package proyecto;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 
-import ejercicios_maraton.Jingle_Composing.parentesis;
 import  linealdata.*;
 public class nodo  implements Node{
  public String etiqueta;
@@ -38,16 +32,12 @@ public String getEtiqueta() {
 	public void setNodos(List nodos) {
 		this.nodos = nodos;
 	}
-	public void añadirborde(edge edge) {
-        if (nodos == null) {
-            nodos = new List();
-        }
-        nodos.insertAtBegin(edge);
+	
+		public String toString() {
+			
+	        return "nodo"+etiqueta;
     }
-	public String toString() {
-		nodos.printList();
-        return "\n " +"soy el nodo"+ etiqueta ;
-    }
+		
 @Override
 public void setNext(Node node) {
 	this.next = (nodo)node;

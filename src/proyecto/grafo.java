@@ -7,13 +7,10 @@ public class grafo {
  public void añadirnodo(nodo node) {
      if (nodos == null) {
          nodos = new List();
-     }else {
-    	 if(nodos.linealSearch(node)==null){
-    	 nodos.insertAtEnd(node);
-    	 }
-    	 
      }
+    nodos.insertAtBegin(node);
      }
+     
  
 
 public List getNodos() {
@@ -24,6 +21,6 @@ public void setNodos(List nodos) {
 } 
 public String toString() {
 	nodos.printList();
-    return " ";
+    return "grafo [nodos="+nodos+"]";
 }
 }

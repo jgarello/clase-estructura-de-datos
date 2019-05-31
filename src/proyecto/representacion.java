@@ -13,9 +13,10 @@ public class representacion {
 	          String[]arreglo=cadena.split(" ");
 	          nodo nuevo=new nodo(arreglo[0]+"");
 	          nodo nuevo2=new nodo(arreglo[1]+"");
-	          nuevo.añadirborde(new edge(nuevo,nuevo2));
+	          nuevo.nodos.insertAtBegin(nuevo2);
 	          graph.añadirnodo(nuevo);
-	          graph.añadirnodo(nuevo2);
+			
+	       
 	      }
 	      b.close();
 	
@@ -24,7 +25,9 @@ public class representacion {
 
 public static void main(String[] args) throws IOException {
         grafo graph = solution("C:\\Users\\julian\\Desktop\\prueba.txt");
-  System.out.println(graph);
-        
+
+        for (int i = 0; i < graph.getNodos().length(); i++) {
+            System.out.println(graph.getNodos().get(i));
     }
+}
 }

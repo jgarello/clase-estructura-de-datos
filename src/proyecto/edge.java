@@ -44,7 +44,7 @@ public class edge implements Node{
 		return this.next;
 	}
 	public String toString() {
-        return  " desde "+origen.getEtiqueta()+ " hacia " +destino.getEtiqueta();
+        return  "\n conexion [origen=" + origen.getEtiqueta()+ ", destino=" + destino.getEtiqueta() ;
     }
 
 
