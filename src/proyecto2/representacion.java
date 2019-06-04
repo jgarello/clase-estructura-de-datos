@@ -78,7 +78,7 @@ public class representacion {
 		arreglo[2]=contador3;
 		arreglo[3]=contador4;
 		arreglo[4]=contador5;
-	
+
 
 		return arreglo;
 
@@ -113,21 +113,21 @@ public class representacion {
 		return arreglo;
 
 	}
-	
+
 	public static int promedio(grafo graph) {
 		nodografo tempmayor=(nodografo)graph.nodos.head;
 		int acumulador=0;
 
 		while (tempmayor!=null) {
-			if(tempmayor.conexiones.length()<=50) {
-				
-			
+
+
+
 			acumulador=acumulador+tempmayor.conexiones.length();
-			}
+
 			tempmayor=tempmayor.next;
 		}
-		
-		
+
+
 		return acumulador/graph.nodos.length();
 
 	}
@@ -135,17 +135,17 @@ public class representacion {
 		nodografo tempmayor=(nodografo)graph.nodos.head;
 		int acumulador=0;
 		int media=promedio(graph);
-		
+
 		while (tempmayor!=null) {
 			int valor=0;
-			if(tempmayor.conexiones.length()<=50) {
+
 			valor=(int)Math.pow(tempmayor.conexiones.length()-media, 2);
 			acumulador=acumulador+valor;
-			}
+
 			tempmayor=tempmayor.next;
 		}
 		double desviacion_estandar=Math.sqrt(acumulador/3171);
-		
+
 		return desviacion_estandar;
 
 	}
@@ -154,19 +154,37 @@ public class representacion {
 		double acumulador=desviacion(graph);
 		int media=promedio(graph);
 		return  (acumulador/media)*100;
-		
+
 	}
 	public static void main(String[] args) throws IOException {
 		grafo graph = solution("C:\\Users\\57314\\Desktop\\grafo");
+		graph.imprimir();
+		System.out.println();
 		System.out.println(graph.nodos.length()+" longitud grafo");
-		//		System.out.println(lista_mayor(graph));
-//		int[]arreglo=particion(graph);
-//for (int i = 0; i < arreglo.length; i++) {
-//	System.out.println(arreglo[i]);
-//}
-		System.out.println(coeficiente(graph));
-		System.out.println(desviacion(graph));
-		//System.out.println(" promedio "+promedio(graph));
+		System.out.println(lista_mayor(graph)+" MAYOR CONEXION DEL GRAFO");
+		int[]arreglo=particion2(graph);
+		for (int i = 0; i < arreglo.length; i++) {
+			if(i<4)
+			System.out.println(arreglo[i]+" GENTE ENTRE 0 Y "+(i+1)*50);
+			else {
+				System.out.println(arreglo[i]+" GENTE MAYOR A Y "+(i+1)*50);
+			}
+			
+		}
+		System.out.println("coeficiente "+coeficiente(graph));
+		System.out.println("desviacion "+desviacion(graph));
+		System.out.println(" promedio "+promedio(graph));
+		System.out.println(" MAS EN PROFUNDIDAD");
+		int[]arreglo2=particion2(graph);
+		for (int i = 0; i < arreglo.length; i++) {
+			if(i<4)
+			System.out.println(arreglo[i]+" GENTE ENTRE 0 Y "+(i+1)*10);
+			else {
+				System.out.println(arreglo[i]+" GENTE MAYOR A Y "+(i)*50);
+			}
+		}
+		
+
 	}
 }
 
