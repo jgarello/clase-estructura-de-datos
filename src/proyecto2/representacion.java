@@ -52,8 +52,36 @@ public class representacion {
 		return mayor;
 
 	}
-	public static int[] particion(grafo graph){
+	public static int[] particion(grafo graph ,int muestra){
 		int[] arreglo=new int[5];
+		if(muestra==2) {
+			nodografo tempmayor=(nodografo)graph.nodos.head;
+			int contador1=0,contador2=0,contador3=0,contador4=0,contador5=0;
+
+			while (tempmayor!=null) {
+
+				if(tempmayor.conexiones.length()<=10) {
+					contador1++;
+				}else if(tempmayor.conexiones.length()>10&&tempmayor.conexiones.length()<=20) {
+					contador2++;
+				}else if(tempmayor.conexiones.length()>20&&tempmayor.conexiones.length()<=30) {
+					contador3++;
+				}else if(tempmayor.conexiones.length()>30&&tempmayor.conexiones.length()<=40) {
+					contador4++;
+				}else if(tempmayor.conexiones.length()>40 &&tempmayor.conexiones.length()<=50 ) {
+					contador5++;
+				}
+
+				tempmayor=tempmayor.next;
+			}
+			arreglo[0]=contador1;
+			arreglo[1]=contador2;
+			arreglo[2]=contador3;
+			arreglo[3]=contador4;
+			arreglo[4]=contador5;
+
+			return arreglo;
+		}else {
 		nodografo tempmayor=(nodografo)graph.nodos.head;
 		int contador1=0,contador2=0,contador3=0,contador4=0,contador5=0;
 
@@ -81,109 +109,134 @@ public class representacion {
 
 
 		return arreglo;
-
+		}
 	}
-	public static int[] particion2(grafo graph){
-		int[] arreglo=new int[5];
+	
+	public static int promedio(grafo graph,int muestra) {
 		nodografo tempmayor=(nodografo)graph.nodos.head;
-		int contador1=0,contador2=0,contador3=0,contador4=0,contador5=0;
+		int acumulador=0;
+		if(muestra==2) {
+			while (tempmayor!=null) {
 
-		while (tempmayor!=null) {
+				if(tempmayor.conexiones.length()<=50) {
 
-			if(tempmayor.conexiones.length()<=10) {
-				contador1++;
-			}else if(tempmayor.conexiones.length()>10&&tempmayor.conexiones.length()<=20) {
-				contador2++;
-			}else if(tempmayor.conexiones.length()>20&&tempmayor.conexiones.length()<=30) {
-				contador3++;
-			}else if(tempmayor.conexiones.length()>30&&tempmayor.conexiones.length()<=40) {
-				contador4++;
-			}else if(tempmayor.conexiones.length()>40 &&tempmayor.conexiones.length()<=50 ) {
-				contador5++;
+					acumulador=acumulador+tempmayor.conexiones.length();
+				}
+				tempmayor=tempmayor.next;
 			}
 
-			tempmayor=tempmayor.next;
+			int[]arreglo=particion(graph,2);
+			return acumulador/arreglo[0];
+		}else {
+			while (tempmayor!=null) {
+
+				acumulador=acumulador+tempmayor.conexiones.length();
+
+				tempmayor=tempmayor.next;
+			}
+
+			return acumulador/graph.nodos.length();
 		}
-		arreglo[0]=contador1;
-		arreglo[1]=contador2;
-		arreglo[2]=contador3;
-		arreglo[3]=contador4;
-		arreglo[4]=contador5;
-
-		return arreglo;
-
 	}
-
-	public static int promedio(grafo graph) {
+	public static double desviacion(grafo graph,int muestra) {
 		nodografo tempmayor=(nodografo)graph.nodos.head;
 		int acumulador=0;
 
-		while (tempmayor!=null) {
+		if(muestra==2) {
 
 
+			int media=promedio(graph,2);
 
-			acumulador=acumulador+tempmayor.conexiones.length();
+			while (tempmayor!=null) {
+				int valor=0;
+				if(tempmayor.conexiones.length()<=50) {
+					valor=(int)Math.pow(tempmayor.conexiones.length()-media, 2);
+					acumulador=acumulador+valor;
+				}
+				tempmayor=tempmayor.next;
+			}
+			int[]arreglo=particion(graph,2);
+			double desviacion_estandar=Math.sqrt(acumulador/arreglo[0]);
 
-			tempmayor=tempmayor.next;
+			return desviacion_estandar;
+		}else {
+
+			int media=promedio(graph,1);
+
+			while (tempmayor!=null) {
+				int valor=0;
+
+				valor=(int)Math.pow(tempmayor.conexiones.length()-media, 2);
+				acumulador=acumulador+valor;
+				tempmayor=tempmayor.next;
+			}
+
+			double desviacion_estandar=Math.sqrt(acumulador/graph.nodos.length());
+
+			return desviacion_estandar;
 		}
-
-
-		return acumulador/graph.nodos.length();
-
 	}
-	public static double desviacion(grafo graph) {
+	public static double coeficiente(grafo graph, int muestra) {
 		nodografo tempmayor=(nodografo)graph.nodos.head;
-		int acumulador=0;
-		int media=promedio(graph);
+		if(muestra==2) {
 
-		while (tempmayor!=null) {
-			int valor=0;
 
-			valor=(int)Math.pow(tempmayor.conexiones.length()-media, 2);
-			acumulador=acumulador+valor;
+			double acumulador=desviacion(graph,2);
+			int media=promedio(graph,2);
+			return  (acumulador/media)*100;
+		}else {
 
-			tempmayor=tempmayor.next;
+			double acumulador=desviacion(graph,1);
+			int media=promedio(graph,1);
+			return  (acumulador/media)*100;	
 		}
-		double desviacion_estandar=Math.sqrt(acumulador/3171);
-
-		return desviacion_estandar;
-
-	}
-	public static double coeficiente(grafo graph) {
-		nodografo tempmayor=(nodografo)graph.nodos.head;
-		double acumulador=desviacion(graph);
-		int media=promedio(graph);
-		return  (acumulador/media)*100;
 
 	}
 	public static void main(String[] args) throws IOException {
-		grafo graph = solution("C:\\Users\\57314\\Desktop\\grafo");
-		graph.imprimir();
+		grafo graph = solution("C:\\Users\\julian\\Desktop\\1111");
+		
 		System.out.println();
 		System.out.println(graph.nodos.length()+" longitud grafo");
-		System.out.println(lista_mayor(graph)+" MAYOR CONEXION DEL GRAFO");
-		int[]arreglo=particion2(graph);
-		for (int i = 0; i < arreglo.length; i++) {
-			if(i<4)
-			System.out.println(arreglo[i]+" GENTE ENTRE 0 Y "+(i+1)*50);
-			else {
-				System.out.println(arreglo[i]+" GENTE MAYOR A Y "+(i+1)*50);
-			}
+		//		System.out.println(lista_mayor(graph)+" MAYOR CONEXION DEL GRAFO");
+		//		int[]arreglo=particion(graph);
+		//		for (int i = 0; i < arreglo.length; i++) {
+		//			if(i<4)
+		//				System.out.println(arreglo[i]+" GENTE ENTRE "+ i*50+ " Y "+(i+1)*50);
+		//			else {
+		//				System.out.println(arreglo[i]+" GENTE MAYOR A Y "+(i+1)*50);
+		//			}
+		//
+		//		}
+int arreglo=1;
+		if(arreglo==2) {
 			
-		}
-		System.out.println("coeficiente "+coeficiente(graph));
-		System.out.println("desviacion "+desviacion(graph));
-		System.out.println(" promedio "+promedio(graph));
-		System.out.println(" MAS EN PROFUNDIDAD");
-		int[]arreglo2=particion2(graph);
-		for (int i = 0; i < arreglo.length; i++) {
+		
+		int[]arreglo2=particion(graph,2);
+		for (int i = 0; i < arreglo2.length; i++) {
 			if(i<4)
-			System.out.println(arreglo[i]+" GENTE ENTRE 0 Y "+(i+1)*10);
+				System.out.println(arreglo2[i]+" personas entre "+ i*10+ " Y "+(i+1)*10+" conexiones");
 			else {
-				System.out.println(arreglo[i]+" GENTE MAYOR A Y "+(i)*50);
+				System.out.println(arreglo2[i]+" personas mayor a "+(i)*10+" conexiones");
 			}
 		}
 		
+		System.out.println("Coeficiente "+coeficiente(graph,2));
+		System.out.println("Desviacion "+desviacion(graph,2));
+		System.out.println("Promedio "+promedio(graph,2));
+		}else {
+			int[]arreglo2=particion(graph,1);
+			for (int i = 0; i < arreglo2.length; i++) {
+				if(i<4)
+					System.out.println(arreglo2[i]+" personas entre "+ i*50+ " Y "+(i+1)*50+" conexiones");
+				else {
+					System.out.println(arreglo2[i]+" personas mayor a "+(i)*50+" conexiones");
+				}
+			}
+			System.out.println( "la conexion mas grande "+lista_mayor(graph));
+			System.out.println("Coeficiente "+coeficiente(graph,1));
+			System.out.println("Desviacion "+desviacion(graph,1));
+			System.out.println("Promedio "+promedio(graph,1));
+		}
 
 	}
 }
